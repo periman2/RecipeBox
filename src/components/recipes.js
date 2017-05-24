@@ -1,7 +1,8 @@
 var React = require("react");
 var AddRecipe = require("./addrecipe");
+var EditRecipe = require("./editrecipe");
 
-var recipies = {
+var recipes = {
     0: {
         name: "Pumpkin Puree", 
         ingredients: ["Pumpkin Puree", "Sweetened Condensed Milk", "Eggs", "Pumpkin Pie Spice", "Pie Crust"],
@@ -15,43 +16,58 @@ var recipies = {
     }
 }
 
-class Recipies extends React.Component {
+class Recipes extends React.Component {
     constructor(props){
         super(props);
-        if(localStorage.getItem("recipies")!==null) {
+        if(localStorage.getItem("recipes")!==null) {
 
-            this.state = {recipies: JSON.parse(localStorage.getItem("recipies")), addVisible: false};
+            this.state = {recipes: JSON.parse(localStorage.getItem("recipes")), addVisible: false, editVisible: false, index: null};
         } else {
-            this.state = {recipies: recipies, addVisible: false};
-            console.log("here");
-            localStorage.setItem("recipies", JSON.stringify(recipies))
+            this.state = {recipes: recipes, addVisible: false, index: null};
+            localStorage.setItem("recipes", JSON.stringify(recipes))
         }
         this.handleAddBtn = this.handleAddBtn.bind(this);
         this.handleVisibility = this.handleVisibility.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleAddFormSubmit = this.handleAddFormSubmit.bind(this);
+        this.handleEditFormSubmit = this.handleEditFormSubmit.bind(this);
         this.createRecipe = this.createRecipe.bind(this);
         this.handleRecipeDelete = this.handleRecipeDelete.bind(this);
+        this.handleEditBtn = this.handleEditBtn.bind(this);
     }
     handleVisibility(event) {
         var index = event.target.getAttribute("value");
         this.setState(function(prevState){
             var state = {};
-            state.recipies = prevState.recipies;
-            state.recipies[index].visibleIng = (!prevState.recipies[index].visibleIng)
+            state.recipes = prevState.recipes;
+            state.recipes[index].visibleIng = (!prevState.recipes[index].visibleIng)
             return state;
         });
     }
     handleAddBtn() {
         this.setState(function(prevState){
-            return {addVisible: !prevState.addVisible, recipies: prevState.recipies}
+            return {addVisible: !prevState.addVisible, recipes: prevState.recipes}
         })
     }
-    handleFormSubmit(event){
+    handleEditBtn(event) {
+        var index = event.target.value;
+        this.setState(function(prevState){
+            return {editVisible: !prevState.editVisible, recipes: prevState.recipes, index: index}
+        })
+    }
+    handleAddFormSubmit(event){
         var name = event.target.childNodes[0].lastChild.value;
         var ingredients = event.target.childNodes[1].lastChild.value.split(",");
         console.log(name, ingredients);
         this.createRecipe(name, ingredients);
         this.handleAddBtn();
+        event.preventDefault();
+    }
+    handleEditFormSubmit(event){
+        console.log(event.target)
+        var name = event.target.childNodes[0].lastChild.value;
+        var ingredients = event.target.childNodes[1].lastChild.value.split(",");
+        var recipe = this.state.recipes[this.state.index];
+        console.log(recipe);
         event.preventDefault();
     }
     createRecipe(name, ingredients){
@@ -61,50 +77,50 @@ class Recipies extends React.Component {
             visibleIng: false
         }
         this.setState(function(prevState){
-            var recipies = prevState.recipies;
-            var count = Object.keys(recipies).length;
-            recipies[count] = newRecipe;
-            localStorage.setItem("recipies", JSON.stringify(recipies))
+            var recipes = prevState.recipes;
+            var count = Object.keys(recipes).length;
+            recipes[count] = newRecipe;
+            localStorage.setItem("recipes", JSON.stringify(recipes))
             return {
-                recipies: recipies
+                recipes: recipes
             }
         })
     }
     handleRecipeDelete(event){
         var index = event.target.getAttribute("value");
         this.setState(function(prevState){
-            var recipies = prevState.recipies;
-            delete recipies[index];
+            var recipes = prevState.recipes;
+            delete recipes[index];
             var count = 0;
-            var newRecipies = {};
-            for (var key in recipies){
+            var newrecipes = {};
+            for (var key in recipes){
                 console.log(key);
-                newRecipies[count] = recipies[key];
+                newrecipes[count] = recipes[key];
                 count ++;
             }
-            console.log(newRecipies);
-            localStorage.setItem("recipies", JSON.stringify(newRecipies))
-            return {recipies: newRecipies, addVisible: false};
-        })
+            console.log(newrecipes);
+            localStorage.setItem("recipes", JSON.stringify(newrecipes))
+            return {recipes: newrecipes, addVisible: false};
+        });
     }
     render() {
-        var allrecipies = this.state.recipies;
-        var keys = Object.keys(allrecipies);
-        var recipies = [];
+        var allrecipes = this.state.recipes;
+        var keys = Object.keys(allrecipes);
+        var recipes = [];
         // console.log(this.state);
         for (var i = 0; i < keys.length; i ++){
-            // console.log(allrecipies[i]);
+            // console.log(allrecipes[i]);
             var details = null;
-            if(this.state.recipies[i].visibleIng){
+            if(this.state.recipes[i].visibleIng){
                 details = <div>
-                    <ul>{allrecipies[i].ingredients.map(returnIng)}</ul>
+                    <ul>{allrecipes[i].ingredients.map(returnIng)}</ul>
                     <button value={i} onClick={this.handleRecipeDelete}>Delete</button>
-                    <button value={i} onClick={this.handleRecipeEdit}>Edit</button>
-                    </div>
+                    <button value={i} onClick={this.handleEditBtn}>Edit</button>
+                    </div>;
             }
-            recipies.push(
+            recipes.push(
                 <div key={i} className="recipe">
-                    <h3 value={i} onClick={this.handleVisibility}>{allrecipies[i].name}</h3>
+                    <h3 value={i} onClick={this.handleVisibility}>{allrecipes[i].name}</h3>
                     {details}
                 </div>
             )
@@ -112,10 +128,11 @@ class Recipies extends React.Component {
         return (
             <div>
                 <ul>
-                 {recipies}
+                 {recipes}
                 </ul>
                 <button onClick={this.handleAddBtn}>Add Recipe</button>
-                {this.state.addVisible && <AddRecipe onSubmitForm={this.handleFormSubmit} onClose={this.handleAddBtn} />}
+                {this.state.addVisible && <AddRecipe onSubmitForm={this.handleAddFormSubmit} onClose={this.handleAddBtn} />}
+                {this.state.editVisible && <EditRecipe recipe={this.state.recipes[this.state.index]} onSubmitEditForm={this.handleEditFormSubmit} onClose={this.handleEditBtn} />}
             </div>
         )
     }
@@ -125,4 +142,4 @@ function returnIng(ing, i){
     return <li key={i}>{ing}</li>
 }
 
-module.exports = Recipies;
+module.exports = Recipes;
