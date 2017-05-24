@@ -1,10 +1,6 @@
 var React = require("react");
 
 class EditRecipes extends React.Component {
-    constructor(props){
-        super(props)
-        
-    }
     render() {
         return(
             <div style={{marginTop: '40px'}}>
@@ -14,6 +10,9 @@ class EditRecipes extends React.Component {
                     </label>
                     <label> Ingredients
                     <input defaultValue={this.props.recipe.ingredients} type='text' name="Ingredients" required/>
+                    </label>
+                    <label> Instructions
+                    <input defaultValue={this.props.recipe.execution} type='text' name="Execution" required/>
                     </label>
                     <input type="submit" value="Edit Recipe"/>
                     <button onClick={this.props.onClose}>Close</button>

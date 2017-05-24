@@ -6,12 +6,14 @@ var recipes = {
     0: {
         name: "Pumpkin Puree", 
         ingredients: ["Pumpkin Puree", "Sweetened Condensed Milk", "Eggs", "Pumpkin Pie Spice", "Pie Crust"],
+        execution: "do Stuff",
         visibleIng: false
 
     },
     1: {
         name: "Spaghetti", 
         ingredients: ["Noodles", "Tomato Sauce", "(Optional) Meatballs"],
+        execution: "do more fucking stuff Stuff",
         visibleIng: false
     }
 }
@@ -57,8 +59,8 @@ class Recipes extends React.Component {
     handleAddFormSubmit(event){
         var name = event.target.childNodes[0].lastChild.value;
         var ingredients = event.target.childNodes[1].lastChild.value.split(",");
-        console.log(name, ingredients);
-        this.createRecipe(name, ingredients);
+        var execution = event.target.childNodes[2].lastChild.value;
+        this.createRecipe(name, ingredients, execution);
         this.handleAddBtn();
         event.preventDefault();
     }
@@ -66,14 +68,22 @@ class Recipes extends React.Component {
         console.log(event.target)
         var name = event.target.childNodes[0].lastChild.value;
         var ingredients = event.target.childNodes[1].lastChild.value.split(",");
-        var recipe = this.state.recipes[this.state.index];
-        console.log(recipe);
+        var execution = event.target.childNodes[2].lastChild.value;
+        var recipes = this.state.recipes;
+        recipes[this.state.index].name = name;
+        recipes[this.state.index].ingredients= ingredients;
+        recipes[this.state.index].execution= execution;
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+        this.setState({
+            recipes: recipes
+        })
         event.preventDefault();
     }
-    createRecipe(name, ingredients){
+    createRecipe(name, ingredients, execution){
         var newRecipe = {
             name: name,
             ingredients: ingredients,
+            execution: execution,
             visibleIng: false
         }
         this.setState(function(prevState){
@@ -114,6 +124,7 @@ class Recipes extends React.Component {
             if(this.state.recipes[i].visibleIng){
                 details = <div>
                     <ul>{allrecipes[i].ingredients.map(returnIng)}</ul>
+                    <p className="execution">{allrecipes[i].execution}</p>
                     <button value={i} onClick={this.handleRecipeDelete}>Delete</button>
                     <button value={i} onClick={this.handleEditBtn}>Edit</button>
                     </div>;
