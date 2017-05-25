@@ -2,9 +2,10 @@ body {
     background: rgba(191, 191, 191, 1);
     font-size: 23px;
     height: 100%;
+    font-family: 'Ek Mukta';
 }
 
-.recipies {
+.recipes {
     background: #fe853e;
     color: rgba(59, 59, 59, 1);
     width: 30%;
@@ -14,10 +15,10 @@ body {
     display: 'inline-block';
     margin-left: 5%;
     padding: 10px;
-    border-radius: 0.5em;
-    webkit-box-shadow: inset 0px 0px 21px 0px rgba(0,0,0,0.81);
-    -moz-box-shadow: inset 0px 0px 21px 0px rgba(0,0,0,0.81);
-    box-shadow: inset 0px 0px 21px 0px rgba(0,0,0,0.81);
+    border-radius: 0.2em;
+    -webkit-box-shadow: 0px 5px 12px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    0px 5px 12px 0px rgba(50, 50, 50, 1);
+    box-shadow:         0px 5px 12px 0px rgba(50, 50, 50, 1);
 }
 
 #root {
@@ -72,11 +73,43 @@ textarea[name="ExecutionAdd"], textarea[name="ExecutionEdit"] {
     height: 100px;
 }
 
-.details {
-    position: absolute;
-    left: 40%;
-    top: 5%;
+/*Styling the buttons*/
+button:hover {
+    cursor: pointer;
 }
 
+.recipes button {
+    background: #6fdb48;
+    display: 'inline-block';
+    font-family: 'Ek Mukta';
+    margin-left: 30px;
+    font-size: 24px;
+    width: 40%;
+    height: 50px;
+}
+
+.details {
+    position: absolute;
+    min-height: 55%;
+    max-height: 800px;
+    border-radius: 0.2em;
+    overflow-x: auto;
+    width: 30%;
+    padding: 20px;
+    left: 40%;
+    top: 18%;
+    background: #8ccc75;
+    -webkit-box-shadow: 0px 5px 12px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    0px 5px 12px 0px rgba(50, 50, 50, 1);
+    box-shadow:         0px 5px 12px 0px rgba(50, 50, 50, 1);
+}
+
+.details li, .details p {
+    font-family: "Gloria Hallelujah"
+}
+
+hr {
+    border-color: #737373;
+}
 
 

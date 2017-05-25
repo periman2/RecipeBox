@@ -150,12 +150,13 @@ class Recipes extends React.Component {
             recipes.push(
                 <div key={i} className="recipe">
                     <h3 value={i} onClick={this.handleVisibility}>{allrecipes[i].name}</h3>
+                    <hr />
                     {details}
                 </div>
             )
         }
         return (
-            <div>
+            <div className='recipes'>
                 <h2><em>Recipes</em></h2>
                 <ul className='list'>
                  {recipes}
