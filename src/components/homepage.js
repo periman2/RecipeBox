@@ -4,7 +4,7 @@ var Recipies = require("./recipes");
 class HomePage extends React.Component {
     render(){
         return (
-            <div>
+            <div className='recipies'>
                 <Recipies />
             </div>
         )
