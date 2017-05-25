@@ -14,7 +14,7 @@ class EditRecipes extends React.Component {
                 <label><br /> <p>Instructions</p>
                 <br /><textarea defaultValue={this.props.recipe.execution} name="ExecutionEdit" required/>
                 </label><br />
-                <input type="submit" value="Edit Recipe"/><br />
+                <input type="submit" value="Edit Recipe"/>
                 <button onClick={this.props.onClose}>Close</button>
             </form>
         </div>

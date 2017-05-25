@@ -78,7 +78,6 @@ class Recipes extends React.Component {
         var execution = event.target.childNodes[2].lastChild.value;
         this.createRecipe(name, ingredients, execution);
         this.handleAddBtn();
-        
     }
     handleEditFormSubmit(event){
         event.preventDefault();

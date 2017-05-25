@@ -7,6 +7,7 @@ class HomePage extends React.Component {
             <div>
                 <h1 style={{textAlign: 'center'}}>freeCodeCamp's Recipe Box</h1>
                 <Recipies />
+                <p className='footer'><em>Created by </em><a href="https://github.com/periman2" target="_blank">Periklis Arnaoutis</a></p>
             </div>
         )
     }
