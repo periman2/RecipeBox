@@ -4,15 +4,15 @@ var EditRecipe = require("./editrecipe");
 
 var myrecipes = {
     0: {
-        name: "Pumpkin Puree", 
-        ingredients: ["Pumpkin Puree", "Sweetened Condensed Milk", "Eggs", "Pumpkin Pie Spice", "Pie Crust"],
-        execution: "do Stuff",
+        name: "Wilted spinach with yoghurt & raisins", 
+        ingredients: ["300 g frozen spinach" , "1 small clove of garlic", "500 g Greek yoghurt", "sunflower oil", "40 g raisins", "extra virgin olive oil"],
+        execution: "Place the spinach in a saucepan with a few tablespoons of water and cook over a medium heat for a few minutes, or until defrosted (if using frozen) and just cooked. Take off the heat and leave to cool.\nPeel and crush the garlic and mix with the yoghurt, ¾ of a teaspoon of sea salt and a generous grind of black pepper. Stir in the cooled spinach.\nHeat 1 tablespoon of sunflower oil in a small pan and fry the raisins for 1 to 2 minutes, or until starting to plump up.\nScatter over the spinach and finish with a drizzle of extra virgin olive oil just before serving.",
         visibleIng: false
     },
     1: {
-        name: "Spaghetti", 
-        ingredients: ["Noodles", "Tomato Sauce", "(Optional) Meatballs"],
-        execution: "do more fucking stuff Stuff",
+        name: "Baked squash", 
+        ingredients: ["1 butternut squash" , "olive oil", "1 red onion", "1 clove of garlic","1 bunch of fresh sage , (30g)","1 clove of garlic","10 sun-dried tomatoes","75 g vac-packed chestnuts","75 g basmati rice","75 g dried cranberries","1 pinch of ground allspice","red wine"],
+        execution: "Preheat the oven to 180°C/350°F/gas 4. Wash the squash, carefully cut it in half lengthways, then remove and reserve the seeds. Use a spoon to score and scoop some flesh out, making a gully for the stuffing all along the length of the squash. Finely chop the scooped-out flesh with the seeds and put into a frying pan on a medium heat with 2 tablespoons of oil. Peel, finely chop and add the onion and garlic, stirring regularly while you pick the sage leaves and finely chop them with the sun-dried tomatoes and chestnuts. Stir into the pan with the rice, cranberries and allspice, add a good pinch of sea salt and black pepper and a swig of red wine, and mix well. Fry for 10 minutes, or until softened, stirring occasionally.\nPack the mixture tightly into the gully in the two squash halves, then press the halves firmly back together. Rub the skin of the squash with a little oil, salt and pepper, and if you’ve got them, pat on any extra herb leaves you have to hand. Place the squash in the centre of a double layer of tin foil, then tightly wrap it up. Bake for around 2 hours, or until soft and cooked through.\nOnce ready, take the squash to the table and open up the foil in front of everyone, then carve into nice thick slices and serve with all the usual trimmings.",
         visibleIng: false
     }
 }
